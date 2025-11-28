@@ -64,6 +64,7 @@ pushd ../godot
 if [ "$platform" = "windows" ]; then
 	# --- Windows ---
 	#generates windows_64_debug.exe and windows_64_release.exe
+	set SCRIPT_AES256_ENCRYPTION_KEY=58ee58cd9e9f07d8ad5d7299880b1cdeeb85e8dc9aba028f8da4d527c3ca78d5
 	scons platform=windows tools=no target=template_release custom_modules="../spine_godot" $mono_module --jobs=$cpus
 	scons platform=windows tools=no target=template_debug custom_modules="../spine_godot" $mono_module --jobs=$cpus
 	cp bin/godot.windows.template_release.x86_64$mono_extension.exe bin/windows_release_x86_64.exe
@@ -72,7 +73,7 @@ if [ "$platform" = "windows" ]; then
 elif [ "$platform" = "macos" ]; then
 	# --- macOS ---
 	# generates macos.zip
-
+	export SCRIPT_AES256_ENCRYPTION_KEY="58ee58cd9e9f07d8ad5d7299880b1cdeeb85e8dc9aba028f8da4d527c3ca78d5"
 	scons platform=macos tools=no target=template_release arch=x86_64 custom_modules="../spine_godot" $mono_module --jobs=$cpus
 	scons platform=macos tools=no target=template_debug arch=x86_64 custom_modules="../spine_godot" $mono_module --jobs=$cpus
 	scons platform=macos tools=no target=template_release arch=arm64 custom_modules="../spine_godot" $mono_module --jobs=$cpus
@@ -93,6 +94,7 @@ elif [ "$platform" = "macos" ]; then
 elif [ "$platform" = "linux" ]; then
 	# --- Linux ---
 	# generates linux_x11_64_release, linux_x11_64_debug
+	export SCRIPT_AES256_ENCRYPTION_KEY="58ee58cd9e9f07d8ad5d7299880b1cdeeb85e8dc9aba028f8da4d527c3ca78d5"
 	scons platform=linuxbsd tools=no target=template_release bits=64 custom_modules="../spine_godot" $mono_module --jobs=$cpus
 	scons platform=linuxbsd tools=no target=template_debug bits=64 custom_modules="../spine_godot" $mono_module --jobs=$cpus
 	strip bin/godot.linuxbsd.template_release.x86_64$mono_extension
