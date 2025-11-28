@@ -64,7 +64,7 @@ pushd ../godot
 if [ "$platform" = "windows" ]; then
 	# --- Windows ---
 	#generates windows_64_debug.exe and windows_64_release.exe
-	set SCRIPT_AES256_ENCRYPTION_KEY=58ee58cd9e9f07d8ad5d7299880b1cdeeb85e8dc9aba028f8da4d527c3ca78d5
+	export SCRIPT_AES256_ENCRYPTION_KEY="58ee58cd9e9f07d8ad5d7299880b1cdeeb85e8dc9aba028f8da4d527c3ca78d5"
 	scons platform=windows tools=no target=template_release custom_modules="../spine_godot" $mono_module --jobs=$cpus
 	scons platform=windows tools=no target=template_debug custom_modules="../spine_godot" $mono_module --jobs=$cpus
 	cp bin/godot.windows.template_release.x86_64$mono_extension.exe bin/windows_release_x86_64.exe
