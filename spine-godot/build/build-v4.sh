@@ -95,21 +95,8 @@ if [ "$os" == "macos" ] && [ $dev == "false" ]; then
 		cp -r GodotSharp Godot.app/Contents/Resources
 	fi
 	popd
-elif [ "$os" == "linux" ]; then
-	export SCRIPT_AES256_ENCRYPTION_KEY="58ee58cd9e9f07d8ad5d7299880b1cdeeb85e8dc9aba028f8da4d527c3ca78d5"
-	scons $target $mono_module compiledb=yes custom_modules="../spine_godot" opengl3=yes --jobs=$cpus
-	if [ $mono == "true" ]; then
-		echo "Building C# glue and assemblies."
-		"./bin/$godot_exe_host" --headless --generate-mono-glue modules/mono/glue
-		python3 ./modules/mono/build_scripts/build_assemblies.py --godot-output-dir ./bin --push-nupkgs-local ../godot-nuget
-	fi
-	cp compile_commands.json ../build
-	if [ -f "bin/godot.linuxbsd.editor.x86_64$mono_extension" ]; then
-		strip bin/godot.linuxbsd.editor.x86_64$mono_extension
-		chmod a+x bin/godot.linuxbsd.editor.x86_64$mono_extension
-	fi
 else
-	set SCRIPT_AES256_ENCRYPTION_KEY=58ee58cd9e9f07d8ad5d7299880b1cdeeb85e8dc9aba028f8da4d527c3ca78d5
+	export SCRIPT_AES256_ENCRYPTION_KEY="58ee58cd9e9f07d8ad5d7299880b1cdeeb85e8dc9aba028f8da4d527c3ca78d5"
 	scons $target $mono_module compiledb=yes custom_modules="../spine_godot" opengl3=yes --jobs=$cpus
 	if [ $mono == "true" ]; then
 		echo "Building C# glue and assemblies."
