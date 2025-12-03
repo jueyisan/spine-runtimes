@@ -65,8 +65,8 @@ if [ "$platform" = "windows" ]; then
 	# --- Windows ---
 	#generates windows_64_debug.exe and windows_64_release.exe
 	export SCRIPT_AES256_ENCRYPTION_KEY="58ee58cd9e9f07d8ad5d7299880b1cdeeb85e8dc9aba028f8da4d527c3ca78d5"
-	scons platform=windows tools=no target=template_release custom_modules="../spine_godot" $mono_module --jobs=$cpus module_embree_enabled=no
-	scons platform=windows tools=no target=template_debug custom_modules="../spine_godot" $mono_module --jobs=$cpus module_embree_enabled=no
+	scons platform=windows tools=no target=template_release custom_modules="../spine_godot" $mono_module --jobs=$cpus 
+	scons platform=windows tools=no target=template_debug custom_modules="../spine_godot" $mono_module --jobs=$cpus 
 	cp bin/godot.windows.template_release.x86_64$mono_extension.exe bin/windows_release_x86_64.exe
 	cp bin/godot.windows.template_debug.x86_64$mono_extension.exe bin/windows_debug_x86_64.exe
 
@@ -74,10 +74,10 @@ elif [ "$platform" = "macos" ]; then
 	# --- macOS ---
 	# generates macos.zip
 	export SCRIPT_AES256_ENCRYPTION_KEY="58ee58cd9e9f07d8ad5d7299880b1cdeeb85e8dc9aba028f8da4d527c3ca78d5"
-	scons platform=macos tools=no target=template_release arch=x86_64 custom_modules="../spine_godot" $mono_module --jobs=$cpus module_embree_enabled=no
-	scons platform=macos tools=no target=template_debug arch=x86_64 custom_modules="../spine_godot" $mono_module --jobs=$cpus module_embree_enabled=no
-	scons platform=macos tools=no target=template_release arch=arm64 custom_modules="../spine_godot" $mono_module --jobs=$cpus module_embree_enabled=no
-	scons platform=macos tools=no target=template_debug arch=arm64 custom_modules="../spine_godot" $mono_module --jobs=$cpus module_embree_enabled=no
+	scons platform=macos tools=no target=template_release arch=x86_64 custom_modules="../spine_godot" $mono_module --jobs=$cpus 
+	scons platform=macos tools=no target=template_debug arch=x86_64 custom_modules="../spine_godot" $mono_module --jobs=$cpus 
+	scons platform=macos tools=no target=template_release arch=arm64 custom_modules="../spine_godot" $mono_module --jobs=$cpus 
+	scons platform=macos tools=no target=template_debug arch=arm64 custom_modules="../spine_godot" $mono_module --jobs=$cpus 
 	lipo -create "bin/godot.macos.template_release.x86_64$mono_extension" "bin/godot.macos.template_release.arm64$mono_extension" -output bin/godot.macos.universal
 	lipo -create "bin/godot.macos.template_debug.x86_64$mono_extension" "bin/godot.macos.template_debug.arm64$mono_extension" -output bin/godot.macos.debug.universal
 	strip -S -x bin/godot.macos.universal
@@ -95,8 +95,8 @@ elif [ "$platform" = "linux" ]; then
 	# --- Linux ---
 	# generates linux_x11_64_release, linux_x11_64_debug
 	export SCRIPT_AES256_ENCRYPTION_KEY="58ee58cd9e9f07d8ad5d7299880b1cdeeb85e8dc9aba028f8da4d527c3ca78d5"
-	scons platform=linuxbsd tools=no target=template_release bits=64 custom_modules="../spine_godot" $mono_module --jobs=$cpus module_embree_enabled=no
-	scons platform=linuxbsd tools=no target=template_debug bits=64 custom_modules="../spine_godot" $mono_module --jobs=$cpus module_embree_enabled=no
+	scons platform=linuxbsd tools=no target=template_release bits=64 custom_modules="../spine_godot" $mono_module --jobs=$cpus 
+	scons platform=linuxbsd tools=no target=template_debug bits=64 custom_modules="../spine_godot" $mono_module --jobs=$cpus 
 	strip bin/godot.linuxbsd.template_release.x86_64$mono_extension
 	strip bin/godot.linuxbsd.template_debug.x86_64$mono_extension
 	chmod a+x bin/godot.linuxbsd.template_release.x86_64$mono_extension
@@ -107,12 +107,12 @@ elif [ "$platform" = "ios" ]; then
 	# --- iOS --
 	# generates ios.zip
 
-	scons p=ios tools=no target=template_release arch=arm64 custom_modules="../spine_godot" --jobs=$cpus module_embree_enabled=no
-	scons p=ios tools=no target=template_debug arch=arm64 custom_modules="../spine_godot" --jobs=$cpus module_embree_enabled=no
-	scons p=ios tools=no target=template_release arch=arm64 ios_simulator=yes custom_modules="../spine_godot" --jobs=$cpus module_embree_enabled=no
-	scons p=ios tools=no target=template_release arch=x86_64 ios_simulator=yes custom_modules="../spine_godot" --jobs=$cpus module_embree_enabled=no
-	scons p=ios tools=no target=template_debug arch=arm64 ios_simulator=yes custom_modules="../spine_godot" --jobs=$cpus module_embree_enabled=no
-	scons p=ios tools=no target=template_debug arch=x86_64 ios_simulator=yes custom_modules="../spine_godot" --jobs=$cpus module_embree_enabled=no
+	scons p=ios tools=no target=template_release arch=arm64 custom_modules="../spine_godot" --jobs=$cpus 
+	scons p=ios tools=no target=template_debug arch=arm64 custom_modules="../spine_godot" --jobs=$cpus 
+	scons p=ios tools=no target=template_release arch=arm64 ios_simulator=yes custom_modules="../spine_godot" --jobs=$cpus 
+	scons p=ios tools=no target=template_release arch=x86_64 ios_simulator=yes custom_modules="../spine_godot" --jobs=$cpus 
+	scons p=ios tools=no target=template_debug arch=arm64 ios_simulator=yes custom_modules="../spine_godot" --jobs=$cpus 
+	scons p=ios tools=no target=template_debug arch=x86_64 ios_simulator=yes custom_modules="../spine_godot" --jobs=$cpus 
 	lipo -create bin/libgodot.ios.template_release.arm64.simulator.a bin/libgodot.ios.template_release.x86_64.simulator.a -output bin/libgodot.ios.template_release.simulator.a
 	lipo -create bin/libgodot.ios.template_debug.arm64.simulator.a bin/libgodot.ios.template_debug.x86_64.simulator.a -output bin/libgodot.ios.template_debug.simulator.a
 	strip -S -x bin/libgodot.ios.template_release.arm64.a
