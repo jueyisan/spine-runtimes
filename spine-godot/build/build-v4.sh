@@ -76,8 +76,8 @@ echo "CPUS: $cpus"
 pushd ../godot
 if [ "$os" == "macos" ] && [ $dev == "false" ]; then
 	export SCRIPT_AES256_ENCRYPTION_KEY="58ee58cd9e9f07d8ad5d7299880b1cdeeb85e8dc9aba028f8da4d527c3ca78d5"
-	scons $target $mono_module arch=x86_64 compiledb=yes custom_modules="../spine_godot" opengl3=yes --jobs=$cpus module_embree_enabled=no
-	scons $target $mono_module arch=arm64 compiledb=yes custom_modules="../spine_godot" opengl3=yes --jobs=$cpus module_embree_enabled=no
+	scons $target $mono_module arch=x86_64 compiledb=yes custom_modules="../spine_godot" opengl3=yes --jobs=$cpus 
+	scons $target $mono_module arch=arm64 compiledb=yes custom_modules="../spine_godot" opengl3=yes --jobs=$cpus
 	if [ $mono == "true" ]; then
 		echo "Building C# glue and assemblies."
 		"./bin/$godot_exe_host" --generate-mono-glue modules/mono/glue
@@ -97,7 +97,7 @@ if [ "$os" == "macos" ] && [ $dev == "false" ]; then
 	popd
 else
 	export SCRIPT_AES256_ENCRYPTION_KEY="58ee58cd9e9f07d8ad5d7299880b1cdeeb85e8dc9aba028f8da4d527c3ca78d5"
-	scons $target $mono_module compiledb=yes custom_modules="../spine_godot" opengl3=yes --jobs=$cpus module_embree_enabled=no
+	scons $target $mono_module compiledb=yes custom_modules="../spine_godot" opengl3=yes --jobs=$cpus
 	if [ $mono == "true" ]; then
 		echo "Building C# glue and assemblies."
 		"./bin/$godot_exe_host" --headless --generate-mono-glue modules/mono/glue
